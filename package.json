@@ -1,7 +1,47 @@
 {
   "name": "demo-app",
   "version": "0.1.0",
+  "main": "main.js",
+  "homepage": ".",
   "private": true,
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js",
+    "electron": "NODE_ENV=development electron .",
+    "packer": "npm run build && rm -rf dist && electron-builder"
+  },
+  "build": {
+    "productName": "DemoApp",
+    "copyright": "liuning@2019-2021",
+    "appId": "liuning.com",
+    "mac": {
+      "category": "tools"
+    },
+    "linux": {
+      "category": "graph"
+    },
+    "win": {
+      "icon": "build/favicon.ico"
+    },
+    "files": [
+      {
+        "from": "./",
+        "to": "./",
+        "filter": [
+          "**/*",
+          "!node_modules"
+        ]
+      },
+      {
+        "from": "./node_modules/image-size",
+        "to": "./node_modules/image-size"
+      }
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
+  },
   "dependencies": {
     "@babel/core": "7.1.6",
     "@svgr/webpack": "2.4.1",
@@ -53,10 +93,9 @@
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
-  "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+  "devDependencies": {
+    "electron": "^4.0.1",
+    "electron-builder": "^20.38.4"
   },
   "eslintConfig": {
     "extends": "react-app"
